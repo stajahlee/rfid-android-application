@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+credit original design concept:
+http://www.viralandroid.com/2016/02/android-material-design-login-form-xml-ui-design.html
+-->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scanTabLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/Scanner_Status"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/Scanner_Status_Not_Connected"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="18dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/buttonConnect"
+        android:layout_width="101dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/CONNECT"
+        app:layout_constraintBottom_toBottomOf="@+id/Scanner_Status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Scanner_Status" />
+
+    <TextView
+        android:id="@+id/rvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Scan_Tab_Title_1"
+        android:textColor="#000"
+        android:background="#ddd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Scanner_Status" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="370dp"
+        android:layout_height="305dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#eee"
+        app:layout_constraintTop_toBottomOf="@+id/rvTitle" />
+
+    <SeekBar
+        android:id="@+id/powerSeekBar"
+        android:layout_width="284dp"
+        android:layout_height="28dp"
+        android:layout_alignParentLeft="false"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <TextView
+        android:id="@+id/powerTextView"
+        android:layout_width="74dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/powerSeekBar"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="right"
+        android:paddingStart="5dp"
+        android:text="@string/Power_Level_Label"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/mediumGray"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <Button
+        android:id="@+id/buttonScan"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/SCAN"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerSeekBar" />
+
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="88dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="CLEAR"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonScan"
+        app:layout_constraintTop_toBottomOf="@+id/powerSeekBar" />
+
+
+</android.support.constraint.ConstraintLayout>

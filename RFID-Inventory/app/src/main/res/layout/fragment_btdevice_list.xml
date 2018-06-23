@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eee"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/device_scan_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_header_gradient"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button_scan"
+            android:layout_width="72dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/btn_default_small"
+            android:includeFontPadding="false"
+            android:text="@string/button_scan" />
+
+        <TextView
+            android:id="@+id/title_paired_devices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/button_scan"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="32dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@string/title_paired_devices"
+            android:textColor="#000"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/paired_list"
+        android:name="refried.rfid_inventory.settings.DevicePickerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:background="#ddd"
+        android:minHeight="240dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:smoothScrollbar="true"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="refried.rfid_inventory.settings.DevicePickerFragment"
+        tools:listitem="@layout/fragment_btdevice_item" />
+
+    <TextView
+        android:id="@+id/title_new_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_header_gradient"
+        android:paddingBottom="8dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="8dp"
+        android:text="@string/title_other_devices_empty"
+        android:textColor="#000"
+        android:visibility="visible" />
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/unpaired_list"
+        android:name="refried.rfid_inventory.settings.DevicePickerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:background="#ddd"
+        android:minHeight="240dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:smoothScrollbar="true"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="refried.rfid_inventory.settings.DevicePickerFragment"
+        tools:listitem="@layout/fragment_btdevice_item" />
+
+</LinearLayout>

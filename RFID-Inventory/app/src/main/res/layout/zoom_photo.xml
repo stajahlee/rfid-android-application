@@ -1,0 +1,15 @@
+<!-- fragment_zoom_photo.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/enlarge_photo"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="center" android:orientation="vertical"  >
+
+    <ImageView
+        android:contentDescription="@string/photo_content_description"
+        android:id="@+id/zoomed_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
+
+</LinearLayout>

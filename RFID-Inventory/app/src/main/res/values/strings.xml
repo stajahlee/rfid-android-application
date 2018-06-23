@@ -1,0 +1,124 @@
+<resources>
+    <string name="app_name">EECS Inventory System</string>
+    <string name="title_activity_login">EECS Inventory System</string>
+
+    <!-- Strings related to login -->
+    <string name="action_sign_in">Sign in with your Google account to use the EECS Inventory App.</string>
+    <string name="begin_inventory">Begin inventory</string>
+    <string name="privacy_policy_instruction">By signing in, you agree to our <a href="https://goo.gl/J4XgMH">Privacy Policy.</a></string>
+
+    <!--Strings related to navigation -->
+    <string name="rfid_scan">Scan</string>
+    <string name="view_inventory">View Inventory</string>
+    <string name="help">Help</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="users_manual">Users Manual</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log out</string>
+    <string name="privacy_policy_link">https://goo.gl/J4XgMH</string>
+
+
+    <string name="rfid_tag_id">RFID Tag ID</string>
+    <string name="name">Name</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="original_price">Original price</string>
+    <string name="last_know_location">Last known location</string>
+    <string name="description">Description</string>
+    <string name="green_red_tag">Green or Red Tag</string>
+    <string name="title_activity_tabbed">EECS Inventory</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_sign_out">Sign out</string>
+    <string name="create_item_button">Create Item</string>
+    <string name="image_button">Add Photo</string>
+    <string name="search">Search</string>
+    <string name="confirm_added_item">Item Added to Inventory</string>
+    <string name="search_bar">Search items</string>
+    <string name="search_button">Search button</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="preference_section_TSL">TSL Bluetooth Device</string>
+    <string name="connect_TSL_device">Scan and Connect TSL Device</string>
+    <string name="Scanner_Status_Connected">Scanner: Connected</string>
+    <string name="Scanner_Status_Not_Connected">Scanner: Not Connected</string>
+    <string name="Scan_Tab_Title_1">RFID Tags In Range</string>
+    <string name="Power_Level_Label">dBm</string>
+
+    <!--Strings related to view page -->
+    <string name="thumbnail">Thumbnail</string>
+    <string name="title">Title</string>
+    <string name="delete_image">Delete image</string>
+
+    <!--Strings related to Full Item view page -->
+    <string name="photo_content_description">Item photograph</string>
+    <string name="item_name">Name of item</string>
+    <string name="green_radio">Green</string>
+    <string name="red_radio">Red</string>
+    <string name="none_radio">None</string>
+
+    <!--Strings related to Edit Item view page -->
+    <string name="cancel">CANCEL</string>
+    <string name="save">SAVE</string>
+    <string name="radio_active">Active</string>
+    <string name="radio_surplus">Sent to surplus</string>
+    <string name="radio_other">Other</string>
+    <string name="other_status_description">Describe "Other" Status</string>
+    <string name="name_of_the_items">Name of the item</string>
+    <string name="rfid_tag_number">RFID tag number</string>
+    <string name="last_known_location">Last known location</string>
+    <string name="price">Price</string>
+    <string name="tag_color">Tag Color</string>
+    <string name="description_of_the_item">Item ID</string>
+    <string name="item_id">Description of the item</string>
+    <string name="item_content">Item Content</string>
+    <string name="welcome">Welcome  </string>
+    <string name="current_user">Current User</string>
+    <string name="apply">Apply</string>
+    <string name="none">None</string>
+    <string name="green_tag">Green Tag</string>
+    <string name="red_tag">Red Tag</string>
+    <string name="filter_by">Filter by</string>
+    <string name="alphabetical">Alphabetical</string>
+    <string name="sort_by">Sort by</string>
+    <string name="filters">Filters</string>
+    <string name="filter">Filter</string>
+    <string name="functions_of_each_option">Functions of each option</string>
+    <string name="RFID_TAG_NUMBER">RFID TAG NUMBER:  </string>
+    <string name="LAST_KNOWN_LOCATION">LAST KNOWN LOCATION:  </string>
+    <string name="SERIAL_NUMBER">SERIAL NUMBER:  </string>
+    <string name="ORIGINAL_PRICE">ORIGINAL PRICE:  </string>
+    <string name="DESCRIPTION">DESCRIPTION</string>
+    <string name="CONNECT">CONNECT</string>
+    <string name="SCAN">SCAN</string>
+    <string name="CLEAR">CLEAR</string>
+
+
+    <!--Strings related to Help page -->
+    <string name="help_option">
+        RFID Scan\n
+        •   Connect scanner via Bluetooth\n
+        •   Adjust the scanning range\n
+        •   Start scanning\n\n
+        View Inventory\n
+        •   View the items list\n
+        •   Update the items profile\n
+        •   Add new items\n\n
+        Privacy Policy\n
+        •   Read Privacy Policy \n\n
+        Users Manual\n
+        •   Read Users Manual\n\n
+        Setting\n
+        •   Search and connect TSL device\n\n
+        Log out\n
+        •   Log out current Google account</string>
+    <string name="rfid_tag_number_hint">RFID TAG NUMBER</string>
+    <string name="last_known_location_hint">LAST KNOWN LOCATION</string>
+    <string name="serial_number_hint">SERIAL NUMBER</string>
+    <string name="original_price_hint">ORIGINAL PRICE</string>
+    <string name="description_hint">DESCRIPTION</string>
+    <string name="name_of_the_item">ITEM NAME</string>
+    <string name="filters_title">Filters</string>
+    <string name="clear_filters">Clear Filters</string>
+    <string name="minimum_num">Minimum</string>
+    <string name="price_range">Price Range</string>
+    <string name="maximum">Maximum</string>
+
+</resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/help_page"
+            android:icon="@drawable/ic_help"
+            android:title="@string/help" />
+        <item
+            android:id="@+id/rfid_scan_page"
+            android:icon="@drawable/ic_bluetooth_searching"
+            android:title="@string/rfid_scan" />
+        <item
+            android:id="@+id/view_inventory_page"
+            android:icon="@drawable/ic_inventory_list"
+            android:title="@string/view_inventory" />
+        <item
+            android:id="@+id/privacy_policy_page"
+            android:icon="@drawable/ic_privacy_policy"
+            android:title="@string/privacy_policy" />
+        <item
+            android:id="@+id/users_manual_page"
+            android:icon="@drawable/ic_users_manual"
+            android:title="@string/users_manual"/>
+        <item
+            android:id="@+id/settings_page"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/log_out" />
+    </group>
+
+</menu>

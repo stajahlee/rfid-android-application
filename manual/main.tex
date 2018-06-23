@@ -1,0 +1,140 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% EECS Inventory Application User Manual
+% February 20, 2018
+% The ReFrIeD Software Team
+% Stajah Hoeflich, Jake Holle, James Underwood, Ke Wen
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper]{report}
+% page margins and other settings * * * * * * * * * * * * * *
+\usepackage[top=0.70in, bottom=0.70in, left=0.8in,right=0.80in]{geometry} % page alignment with this package
+\usepackage[pdftex]{graphicx} %for embedding images
+\usepackage[%dvips, % commented for pdflatex
+bookmarks,  colorlinks=false]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+\hypersetup{pdfborder = {0 0 0}}
+\usepackage{float} %used for figure placement with H as parameter
+\usepackage{hyperref}
+\usepackage{pslatex} % for times new roman, old package, but works
+\usepackage{array} % for making text bold in table
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage[font=small,labelfont=bf]{caption}
+\def\figurename{\textbf{Figure }}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{sidecap}  %required for side captions
+\usepackage{multirow}
+ 
+\lstset{ %
+  language=Java,                % the language of the code
+  basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,                   % each line is numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  morekeywords={*,...}               % if you want to add more keywords to the set
+}
+\setlength\parindent{0pt}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%For the header and footer  * * * * * * * * * * * * * * * * * * 
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%
+\fancyfoot[L]{\emph{School of Electrical Engineering and Computer Science, Russ College, Ohio University}} % except the center
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+}
+
+\pagestyle{fancy}
+\rhead{\emph{User Manual --{} EECS Inventory Application}}
+
+\fancyfoot[LO,LE]{\emph{School of Electrical Engineering and Computer Science, Russ College, Ohio University}}
+\cfoot{}
+\fancyfoot[RO, RE]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%For the header and footer Over   * * * * * * * * * * * * * * *
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\definecolor{purple}{rgb}{0.4,0.28,0.72}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{darkgray}{rgb}{0.25,0.25,0.25}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\Large\bfseries\color{purple}}
+  {\chaptertitlename\ \thechapter}{20pt}{\LARGE}
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries\color{darkgray}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries\color{gray}}
+  {\thesubsection}{1em}{}  
+  
+\setlength{\parindent}{1cm}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%GLOBAL SETTINGS OVER, DOCUMENT BEGINS
+\begin{document}
+\renewcommand\bibname{References}
+\lhead{ }
+
+%FROM HERE YOUR PAGES START GETTING ADDED
+
+% includes the cover page
+\input{manual/cover.tex}
+\newpage
+
+\input{manual/preface.tex} % adds the Preface page
+\newpage
+
+%TABLE OF CONTENTS AND LIST OF FIGURES ARE AUTOMATICALLY ADDED BY FOLLOWING COMMANDS
+%ADD FIGURE OF TABLES IF YOU NEED TO, CHECK DOCUMENTATION
+\pagenumbering{roman} %numbering before main content starts
+
+%To reset the Header & Footer for TOC and LOF
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents % adds Index Page
+
+\addtocontents{lof}{\protect\thispagestyle{empty}}
+\listoffigures % adds List of Figures
+\cleardoublepage
+
+%And reset back the settings we choose for Header and Footer
+\pagestyle{fancy}
+
+\newpage
+\pagenumbering{arabic} %reset numbering to normal for the main content
+
+\input{manual/overview.tex} % adds the Overview page
+\input{manual/installation.tex} % adds the installation page
+\input{manual/accounts.tex} % adds the accounts page
+\input{manual/searching.tex} % adds the logging in/out page
+\input{manual/data.tex} % adds the logging in/out page
+\input{manual/reporting.tex} % adds the logging in/out page
+\input{manual/admin.tex} % adds the logging in/out page
+\input{manual/ref.tex} % adds the References page
+
+\end{document}

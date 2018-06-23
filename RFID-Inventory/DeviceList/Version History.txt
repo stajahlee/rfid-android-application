@@ -1,0 +1,6 @@
+Version History
+---------------
+
+11/11/2014		Updated to ensure the Scan button is always visible and to include the number of items paired and discovered.
+
+19/11/2013		Initial Creation

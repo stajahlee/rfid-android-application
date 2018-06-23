@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "470805803925",
+    "firebase_url": "https://rfid-inventory.firebaseio.com",
+    "project_id": "rfid-inventory",
+    "storage_bucket": "rfid-inventory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470805803925:android:a71ced54e129e47c",
+        "android_client_info": {
+          "package_name": "refried.rfid_inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470805803925-ftub2ki4ehljttf8ctd2is2kr105ak08.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "refried.rfid_inventory",
+            "certificate_hash": "4fa079a0f3c8ff3592eb9764888b9bbea2dcffb4"
+          }
+        },
+        {
+          "client_id": "470805803925-v2i4c28n7p4uuev6dgao67sk23ff5drh.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "470805803925-h51hiepmhea54tvhphfn7otff0v634c9.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "470805803925-99qihuu0hd7kpi1ip8lmmrq125dj20d1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "refried.rfid_inventory",
+            "certificate_hash": "bd1816aa31bd75d67e1eb2e61b7d81a1f4e18bba"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMy198Ytxr2xneG5MqfEzJHNt_MriEgZI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470805803925-v2i4c28n7p4uuev6dgao67sk23ff5drh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

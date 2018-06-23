@@ -1,0 +1,7 @@
+com.uk.tsl.barcodeconfiguration
+com.uk.tsl.rfid.asciiprotocol
+com.uk.tsl.rfid.asciiprotocol.commands
+com.uk.tsl.rfid.asciiprotocol.enumerations
+com.uk.tsl.rfid.asciiprotocol.parameters
+com.uk.tsl.rfid.asciiprotocol.responders
+com.uk.tsl.utils

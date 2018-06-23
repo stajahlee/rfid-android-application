@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/rfid_tag_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:errorEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/last_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/rfid_tag_num_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:textColor="@drawable/edit_text_override"
+                android:hint="@string/rfid_tag_number_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/last_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:errorEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/serial_num"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rfid_tag_num">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/last_location_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@drawable/edit_text_override"
+                android:hint="@string/last_known_location_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/serial_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:errorEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/original_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_location">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/serial_num_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:textColor="@drawable/edit_text_override"
+                android:hint="@string/serial_number_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/original_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:errorEnabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/roleRadioGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serial_num">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/original_price_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:textColor="@drawable/edit_text_override"
+                android:hint="@string/original_price_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/roleRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/mediumGray"
+            android:checkedButton="@+id/tag_color_selected"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toTopOf="@+id/item_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/original_price">
+
+            <RadioButton
+                android:id="@+id/no_tag_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="#9e9e9e"
+                android:text="@string/none_radio"
+                android:textSize="15sp"/>
+
+            <RadioButton
+                android:id="@+id/green_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="#9e9e9e"
+                android:text="@string/green_radio"
+                android:textColor="#1b5e20"
+                android:textSize="15sp"/>
+
+            <RadioButton
+                android:id="@+id/red_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="#9e9e9e"
+                android:text="@string/red_radio"
+                android:textColor="#b71c1c"
+                android:textSize="15sp"/>
+
+        </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/item_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/statusRadioGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roleRadioGroup">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/item_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/edit_text_override"
+                android:imeOptions="actionDone"
+                android:hint="@string/description_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/statusRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2b2b2b"
+            android:checkedButton="@+id/tag_color_selected"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin"
+            app:layout_constraintBottom_toTopOf="@+id/otherStatusDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_description">
+
+            <RadioButton
+                android:id="@+id/statusActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/radio_active"
+                android:textColor="#2b2b2b"
+                android:textSize="15sp"/>
+
+            <RadioButton
+                android:id="@+id/statusSurplus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/radio_surplus"
+                android:textColor="#2b2b2b"
+                android:textSize="15sp"/>
+
+            <RadioButton
+                android:id="@+id/statusOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/radio_other"
+                android:textColor="#2b2b2b"
+                android:textSize="15sp"/>
+
+        </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/otherStatusDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusRadioGroup">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/otherStatusDescription_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/edit_text_override"
+                android:imeOptions="actionDone"
+                android:hint="@string/description_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

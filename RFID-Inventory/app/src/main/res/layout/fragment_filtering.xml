@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_done"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#bdbdbd"
+    android:layout_gravity="end"
+    android:focusableInTouchMode="true"
+    app:layout_constraintLeft_creator="1"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_creator="0"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:layout_constraintLeft_creator="0"
+    tools:layout_constraintTop_creator="0" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/filters_title"
+        android:textColor="#616161"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/sort_by"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/sort_by"
+        android:textColor="#616161"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <LinearLayout
+        android:id="@+id/sortOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sort_by">
+
+        <Button
+            android:id="@+id/alphaSort"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="#e0e0e0"
+            android:padding="4dp"
+            android:shadowColor="#e0e0e0"
+            android:text="@string/alphabetical" />
+
+        <Button
+            android:id="@+id/priceSort"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="#e0e0e0"
+            android:padding="4dp"
+            android:shadowColor="#e0e0e0"
+            android:text="@string/price" />
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#eeeeee"
+        android:layout_marginTop="16dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="215dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sortOptions"/>
+
+    <TextView
+        android:id="@+id/filter_by"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/filter_by"
+        android:textColor="#616161"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintTop_toBottomOf="@id/filter_by"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tag_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/tag_color"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner" />
+
+    <RadioGroup
+        android:id="@+id/tagsRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/mediumGray"
+        android:checkedButton="@+id/tag_color_selected"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tag_color">
+
+        <RadioButton
+            android:id="@+id/red_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:text="@string/red_tag"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/green_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:text="@string/green_tag"
+            android:textSize="14sp" />
+
+        <RadioButton
+        android:id="@+id/no_tag_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:enabled="true"
+        android:text="@string/none"
+        android:textSize="14sp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/price_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:text="@string/price_range"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagsRadioGroup" />
+
+
+    <LinearLayout
+        android:id="@+id/price_range_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_range">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/price_min_layout"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:textColorHint="@color/colorPrimary"
+        app:hintTextAppearance="@style/AlertDialog.AppCompat.Light"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/price_min_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/minimum_num"
+            android:textColor="@color/colorAccentTeal"
+            android:inputType="numberSigned" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/price_max_layout"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:textColorHint="@color/colorPrimary"
+        app:hintTextAppearance="@style/AlertDialog.AppCompat.Light"
+        app:errorEnabled="true"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/price_max_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/maximum"
+            android:textColor="@color/colorAccentTeal"
+            android:inputType="numberSigned" />
+
+    </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/applyButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:padding="0dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:shadowColor="#e0e0e0"
+        android:text="@string/apply"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_range_parent" />
+
+    <Button
+        android:id="@+id/clearFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:text="@string/clear_filters"
+        android:textColor="@color/colorAccentTeal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/applyButton" />
+
+</android.support.constraint.ConstraintLayout>

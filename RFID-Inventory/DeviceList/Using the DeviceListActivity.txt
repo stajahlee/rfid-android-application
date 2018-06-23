@@ -1,0 +1,20 @@
+How to use the DeviceListActivity
+---------------------------------
+
+Add the DeviceList project as a library to the target project:
+
+	1) Add the DeviceList project to the target project's workspace
+	2) In Package Explorer right click the target project and select Properties
+	3) Select 'Android' from the list on the left
+	4) In the 'Library' section click the 'Add' button
+	5) Select the 'DeviceList' project
+	
+
+Add the DeviceListActivity to the target project manifest:
+
+	1) Open the App's AndroidManifest.xml
+	2) Click the 'Application' tab at the bottom of the window
+	3) In the 'Application Nodes' area add a new Activity
+	4) Name the activity 'com.uk.tsl.rfid.DeviceListActivity' using the 'Attributes' panel at the bottom right
+	
+	

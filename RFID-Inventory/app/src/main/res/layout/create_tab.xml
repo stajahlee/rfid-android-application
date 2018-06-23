@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="refried.rfid_inventory.MainContentActivity">
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/rfid_tag_num_textbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="140dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/rfid_tag_id"
+        android:layout_below="@+id/section_label"
+        android:layout_toEndOf="@+id/section_label" />
+
+    <EditText
+        android:id="@+id/item_name_textbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/name"
+        android:layout_alignBaseline="@+id/rfid_tag_num_textbox"
+        android:layout_alignBottom="@+id/rfid_tag_num_textbox"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/serial_num_textbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/item_name_textbox"
+        android:layout_below="@+id/item_name_textbox"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        android:hint="@string/serial_number" />
+
+    <EditText
+        android:id="@+id/tag_color_textbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        android:hint="@string/green_red_tag"
+        android:layout_alignBaseline="@+id/serial_num_textbox"
+        android:layout_alignBottom="@+id/serial_num_textbox"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/original_price_textbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tag_color_textbox"
+        android:layout_below="@+id/tag_color_textbox"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/original_price"/>
+
+    <EditText
+        android:id="@+id/last_location_textbox"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        android:hint="@string/last_know_location"
+        android:layout_alignBaseline="@+id/original_price_textbox"
+        android:layout_alignBottom="@+id/original_price_textbox"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/description_textbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/original_price_textbox"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="@string/description"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/create_item_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="30dp"
+        android:text="@string/create_item_button" />
+
+    <ImageButton
+        android:id="@+id/add_photo_imagebutton"
+        android:layout_width="330dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/item_name_textbox"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/add_photo_icon"
+        android:contentDescription="@string/image_button"/>
+
+    <Button
+        android:id="@+id/add_photo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/create_item_button"
+        android:layout_alignBottom="@+id/create_item_button"
+        android:text="@string/image_button" />
+
+</RelativeLayout>

@@ -1,0 +1,31 @@
+
+Using the Rfid.AsciiProtocol-Library with Android Studio
+--------------------------------------------------------
+
+The Rfid.AsciiProtocol-Library module provides the Rfid.AsciiProtocol library in .arr format and the associated documentation.
+
+To add this to your project:
+
+    Copy the Rfid.AsciiProtocol-Library folder to your project folder.
+    Add this line to the Settings.Gradle file
+
+        include ':Rfid.AsciiProtocol-Library'
+
+    Run a Gradle Sync
+
+    The included Javadoc documentation can be associated with the library using the Project view.
+        Expand the 'External Libraries'
+        Right-click the 'Rfid.AsciiProtocol-Library-unspecified' item.
+        Open the 'Library properties'
+        Click the green +
+        Navigate to the 'Rfid.AsciiProtocol-Library/doc' folder and click 'OK'
+
+    Run a Gradle Sync
+
+    In the Project view, right-click on the module that you want to use the library with and select 'Open Module settings'.
+    Ensure that the correct module is selected and then click the Dependencies Tab.
+    Use the + button to add a new 'Module Dependency'
+    Select the 'Rfid.AsciiProtocol-Library' from the list presented.
+
+You should now have access to the TSL AsciiProtocol API from within your project along with integrated documentation.
+

@@ -1,0 +1,33 @@
+\chapter{IMPORTING AND EXPORTING DATA}
+
+\section{Importing}
+
+\subsection{Firebase}
+ From the Firebase console it is possible to import data from the Data page. From this page you can import your database data in JSON format, or manually edit data in the web interface.
+
+\begin{enumerate}
+	\item Select the node you wish to import data to. Child elements in the imported data are automatically created.
+	\item Click action menu and select \textbf{Import JSON}.
+	\item Browse to the file you wish to import and click Import.
+\end{enumerate}
+
+\subsection{Inventory Application}
+ As Described in Chapter 3, section 3.2, when the application opens for the first time the user must log in to the application using their Google account. If they are a valid user then they may begin using the application. By logging in and using a stable internet connection the application will automatically Import data from Firebase. If the user is creating a new item, they must input their data correctly, which includes giving a picture for the new item. This involves giving the application to import picture files from the phones storage. If the user gives such permissions they can use their phone camera or an existing picture to put into the new database entry.     
+
+\section{Exporting}
+
+\subsection{Firebase}
+ From the Firebase console it is possible to export data from the Data page. From this page you can export your database data in JSON format.
+
+\begin{enumerate}
+	\item Select the node you wish to export. This also exports all children of the node.
+	\item Click action menu and select \textbf{Export JSON}.
+	\item Your browser will begin downloading a .json file for your database data.
+\end{enumerate}
+
+\subsection{Inventory Application}
+
+Similarly to Importing, exporting is largely automated. Data in the form of pictures and other inputs are Sent back and forth constantly from Application to Firebase as the user interacts with different Application activities. Actions including editing existing items or creating new items in the View Tab all automatically export to the online database upon saving. These actions can only be completed and exported to Firebase if properly filled out with correct data types or values and such that there are no duplicates.      
+
+\vspace*{\fill}
+{\raggedleft{\scshape Jake Holle} \\ Athens, OH \\ February 2018\par}

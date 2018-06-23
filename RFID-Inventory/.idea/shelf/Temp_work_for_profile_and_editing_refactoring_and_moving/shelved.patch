@@ -1,0 +1,824 @@
+Index: app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePageFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePageFragment.java	(revision )
++++ app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePageFragment.java	(revision )
+@@ -0,0 +1,316 @@
++package refried.rfid_inventory.profilepage;
++
++import android.content.Context;
++import android.content.Intent;
++import android.net.Uri;
++import android.os.Bundle;
++import android.support.design.widget.CollapsingToolbarLayout;
++import android.support.design.widget.FloatingActionButton;
++import android.support.v4.app.Fragment;
++import android.support.v4.app.FragmentTransaction;
++import android.support.v7.app.AppCompatActivity;
++import android.support.v7.widget.LinearLayoutManager;
++import android.support.v7.widget.Toolbar;
++import android.util.Log;
++import android.view.LayoutInflater;
++import android.view.Menu;
++import android.view.MenuInflater;
++import android.view.MenuItem;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.ImageButton;
++import android.widget.RadioButton;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.bumptech.glide.Glide;
++import com.firebase.ui.auth.AuthUI;
++
++import refried.rfid_inventory.MainActivity;
++import refried.rfid_inventory.R;
++import refried.rfid_inventory.TabbedActivity.CreateTabFragment.CreateTabContract;
++import refried.rfid_inventory.TabbedActivity.ViewTabFragment.ViewTabPresenter;
++import refried.rfid_inventory.database.FirebaseDBInteractor;
++import refried.rfid_inventory.database.InventoryItem;
++import refried.rfid_inventory.editpage.ItemEditPage;
++import refried.rfid_inventory.util.ItemsAdapter;
++import refried.rfid_inventory.util.ProfilePictureZoom;
++
++/**
++ * Full item view shows all of the details about an
++ * inventory item and allows the user to make edits
++ * to the item in this screen
++ */
++public class ItemProfilePageFragment extends Fragment implements ItemProfilePageContract.View {
++
++    ItemProfilePageContract.Presenter presenter;
++    Context context;
++    InventoryItem inventoryItem = new InventoryItem();
++
++    ImageButton profilePhoto;
++    TextView rfidTagTextView;
++    TextView locationTextView;
++    TextView serialNumTextView;
++    TextView priceTextView;
++    RadioButton radioButtonRedTag;
++    RadioButton radioButtonGreenTag;
++    RadioButton radioButtonNoTagColor;
++    TextView descriptionTextView;
++    FloatingActionButton myFab;
++
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setHasOptionsMenu(true);
++    }
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        View view = inflater.inflate(R.layout.item_profile_parent_page, container, false);
++        context = getActivity().getApplicationContext();
++        presenter = new ItemProfilePagePresenter(this, new FirebaseDBInteractor());
++
++        // item name is in the collapsing toolbar rather than a TextView
++        CollapsingToolbarLayout collapsingToolbar = view.findViewById(R.id.toolbar_layout);
++        collapsingToolbar.setTitle(inventoryItem.getName());
++
++        // pull in photo
++        profilePhoto = view.findViewById(R.id.profile_photo);
++        Glide.with(profilePhoto.getContext())
++                .load(inventoryItem.getPhotograph())
++                .into(profilePhoto);
++
++        profilePhoto.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                // 1. create an intent pass class name or intnet action name
++                Intent intent = new Intent(view.getContext(), ProfilePictureZoom.class);
++
++                // 2. put key/value data
++                intent.putExtra("PhotoURL", inventoryItem.getPhotograph());
++
++                // 5. start the activity
++                view.getContext().startActivity(intent);
++            }
++        });
++
++        // pull in RFID tag number
++        rfidTagTextView = view.findViewById(R.id.rfid_tag_num_textbox);
++        String text = (inventoryItem.getRfid_tag_num());
++        rfidTagTextView.setText(text);
++
++        // pull in location
++        locationTextView = view.findViewById(R.id.last_location_textbox);
++        text = (inventoryItem.getLast_location());
++        locationTextView.setText(text);
++
++        // pull in serial number
++        serialNumTextView = view.findViewById(R.id.serial_num_textbox);
++        text = (inventoryItem.getSerial_num());
++        serialNumTextView.setText(text);
++
++        // pull in price
++        priceTextView = view.findViewById(R.id.original_price_textbox);
++        text = (inventoryItem.getOriginal_price());
++        priceTextView.setText(text);
++
++        // pull in tag color
++        if ("red".equals(inventoryItem.getTag_color())) {
++            radioButtonRedTag = view.findViewById(R.id.red_tag);
++            radioButtonRedTag.setChecked(true);
++        } else if ("green".equals(inventoryItem.getTag_color())) {
++            radioButtonGreenTag = view.findViewById(R.id.green_tag);
++            radioButtonGreenTag.setChecked(true);
++
++        } else {
++            radioButtonNoTagColor = view.findViewById(R.id.no_tag_color);
++            radioButtonNoTagColor.setChecked(true);
++        }
++
++        // pull in item description
++        descriptionTextView = view.findViewById(R.id.description_text);
++        text = (inventoryItem.getDescription());
++        descriptionTextView.setText(text);
++
++        myFab = view.findViewById(R.id.fab);
++        myFab.setOnClickListener(new View.OnClickListener() {
++            public void onClick(View v) {
++                openEditPage();
++            }
++        });
++
++        return view;
++
++    }
++
++
++    @Override
++    public void onStart() {
++        presenter.start(context);
++        super.onStart();
++    }
++
++    @Override
++    public void onStop() {
++        presenter.stop();
++        super.onStop();
++    }
++
++    @Override
++    public void onDestroyView() {
++        presenter = null;
++        super.onDestroyView();
++    }
++
++    @Override
++    public void onItemClick(int n) {
++
++    }
++
++    public void openEditPage() {
++        // do something
++    }
++
++
++    @Override
++    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
++        inflater.inflate(R.menu.menu_tabbed, menu);
++        super.onCreateOptionsMenu(menu, inflater);
++    }
++
++//  FROM THIS FILE AS AN ACTIVITY:
++//    @Override
++//    public boolean onCreateOptionsMenu(Menu menu) {
++//        // Inflate the menu; this adds items to the action bar if it is present.
++//        getMenuInflater().inflate(R.menu.menu_tabbed, menu);
++//        return true;
++//    }
++
++
++    //  FROM THIS FILE AS AN ACTIVITY:
++    @Override
++    public boolean onOptionsItemSelected(MenuItem item) {
++        // Handle action bar item clicks here. The action bar will
++        // automatically handle clicks on the Home/Up button, so long
++        // as you specify a parent activity in AndroidManifest.xml.
++        switch (item.getItemId()) {
++            //noinspection SimplifiableIfStatement
++            case R.id.action_settings:
++                return true;
++            case R.id.action_sign_out:
++                AuthUI.getInstance().signOut(context);
++                Intent intent = new Intent(context, MainActivity.class);
++                startActivity(intent);
++                Toast.makeText(context, "Signed out", Toast.LENGTH_SHORT).show();
++                return true;
++        }
++        return super.onOptionsItemSelected(item);
++    }
++}
++
++//    @Override
++//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
++//
++//        if (requestCode == 1) {
++//            if(resultCode == RESULT_OK){
++//                InventoryItem inventoryItem = data.getParcelableExtra("result");
++//
++//                setContentView(R.layout.item_profile_parent_page);
++//                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
++//                setSupportActionBar(toolbar);
++//
++//                setInventoryItemData(inventoryItem);
++//                editItem(inventoryItem);
++//            }
++//            if (resultCode == RESULT_CANCELED) {
++//                Toast.makeText(this, "Edit canceled", Toast.LENGTH_SHORT).show();
++//            }
++//        }
++//    }
++
++//    private void setInventoryItemData(final InventoryItem inventoryItem) {
++//
++//        // item name is in the collapsing toolbar rather than a TextView
++//        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.toolbar_layout);
++//        collapsingToolbar.setTitle(inventoryItem.getName());
++//
++//        // pull in photo
++//        ImageButton profilePhoto = findViewById(R.id.profile_photo);
++//        Glide.with(profilePhoto.getContext())
++//                .load(inventoryItem.getPhotograph())
++//                .into(profilePhoto);
++//
++//        profilePhoto.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View view) {
++//                // 1. create an intent pass class name or intnet action name
++//                Intent intent = new Intent(view.getContext(), ProfilePictureZoom.class);
++//
++//                // 2. put key/value data
++//                intent.putExtra("PhotoURL", inventoryItem.getPhotograph());
++//
++//                // 5. start the activity
++//                view.getContext().startActivity(intent);
++//            }
++//        });
++//
++//        // pull in RFID tag number
++//        TextView rfidTagTextView = findViewById(R.id.rfid_tag_num_textbox);
++//        String text = (inventoryItem.getRfid_tag_num());
++//        rfidTagTextView.setText(text);
++//
++//        // pull in location
++//        TextView locationTextView = findViewById(R.id.last_location_textbox);
++//        text = (inventoryItem.getLast_location());
++//        locationTextView.setText(text);
++//
++//        // pull in serial number
++//        TextView serialNumTextView = findViewById(R.id.serial_num_textbox);
++//        text = (inventoryItem.getSerial_num());
++//        serialNumTextView.setText(text);
++//
++//        // pull in price
++//        TextView priceTextView = findViewById(R.id.original_price_textbox);
++//        text = (inventoryItem.getOriginal_price());
++//        priceTextView.setText(text);
++//
++//        // pull in tag color
++//        if ("red".equals(inventoryItem.getTag_color())) {
++//            RadioButton radioButtonRedTag = findViewById(R.id.red_tag);
++//            radioButtonRedTag.setChecked(true);
++//        }
++//        else if ("green".equals(inventoryItem.getTag_color())) {
++//            RadioButton radioButtonGreenTag = findViewById(R.id.green_tag);
++//            radioButtonGreenTag.setChecked(true);
++//
++//        }
++//        else {
++//            RadioButton radioButtonNoTagColor = findViewById(R.id.no_tag_color);
++//            radioButtonNoTagColor.setChecked(true);
++//        }
++//
++//        // pull in item description
++//        TextView descriptionTextView = findViewById(R.id.description_text);
++//        text = (inventoryItem.getDescription());
++//        descriptionTextView.setText(text);
++//    }
++//
++//    private void editItem(final InventoryItem item){
++//        myFab = findViewById(R.id.fab);
++//        myFab.setOnClickListener(new View.OnClickListener() {
++//            public void onClick(View v) {
++//                Intent intent = new Intent(v.getContext(), ItemEditPage.class);
++//
++//                // send the current item fields to the edit page
++//                intent.putExtra("Parcelable inventory item", item);
++//                // need to get the edit result back to refresh the profile page
++//                // after saving
++//                startActivityForResult(intent, 1);
++//                finish();
++//            }
++//        });
++//    }
++//}
+Index: app/src/main/java/refried/rfid_inventory/TabbedActivity/ItemProfilePage.java
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/TabbedActivity/ItemProfilePage.java	(date 1519957966000)
++++ app/src/main/java/refried/rfid_inventory/TabbedActivity/ItemProfilePage.java	(date 1519957966000)
+@@ -1,177 +0,0 @@
+-package refried.rfid_inventory.TabbedActivity;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.support.design.widget.CollapsingToolbarLayout;
+-import android.support.design.widget.FloatingActionButton;
+-import android.support.v7.app.AppCompatActivity;
+-import android.support.v7.widget.Toolbar;
+-import android.util.Log;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-import android.view.View;
+-import android.widget.ImageButton;
+-import android.widget.RadioButton;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import com.bumptech.glide.Glide;
+-import com.firebase.ui.auth.AuthUI;
+-
+-import refried.rfid_inventory.MainActivity;
+-import refried.rfid_inventory.R;
+-import refried.rfid_inventory.database.InventoryItem;
+-
+-/**
+- * Full item view shows all of the details about an
+- * inventory item and allows the user to make edits
+- * to the item in this screen
+- */
+-public class ItemProfilePage extends AppCompatActivity {
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        InventoryItem inventoryItem = (InventoryItem) getIntent().getParcelableExtra("Parcelable inventory item");
+-
+-        setContentView(R.layout.item_profile_parent_page);
+-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+-        setSupportActionBar(toolbar);
+-
+-        setInventoryItemData(inventoryItem);
+-        editItem(inventoryItem);
+-    }
+-
+-
+-    @Override
+-    public boolean onCreateOptionsMenu(Menu menu) {
+-        // Inflate the menu; this adds items to the action bar if it is present.
+-        getMenuInflater().inflate(R.menu.menu_tabbed, menu);
+-        return true;
+-    }
+-
+-
+-
+-    @Override
+-    public boolean onOptionsItemSelected(MenuItem item) {
+-        // Handle action bar item clicks here. The action bar will
+-        // automatically handle clicks on the Home/Up button, so long
+-        // as you specify a parent activity in AndroidManifest.xml.
+-        switch (item.getItemId()) {
+-            //noinspection SimplifiableIfStatement
+-            case R.id.action_settings:
+-                return true;
+-            case R.id.action_sign_out:
+-                AuthUI.getInstance().signOut(this);
+-                Intent intent = new Intent(this, MainActivity.class);
+-                startActivity(intent);
+-                Toast.makeText(this, "Signed out", Toast.LENGTH_SHORT).show();
+-                return true;
+-        }
+-
+-        return super.onOptionsItemSelected(item);
+-    }
+-
+-    @Override
+-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+-
+-        if (requestCode == 1) {
+-            if(resultCode == RESULT_OK){
+-                InventoryItem inventoryItem = data.getParcelableExtra("result");
+-
+-                setContentView(R.layout.item_profile_parent_page);
+-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+-                setSupportActionBar(toolbar);
+-
+-                setInventoryItemData(inventoryItem);
+-                editItem(inventoryItem);
+-            }
+-            if (resultCode == RESULT_CANCELED) {
+-                Toast.makeText(this, "Edit canceled", Toast.LENGTH_SHORT).show();
+-            }
+-        }
+-    }
+-
+-    private void setInventoryItemData(final InventoryItem inventoryItem) {
+-
+-        // item name is in the collapsing toolbar rather than a TextView
+-        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.toolbar_layout);
+-        collapsingToolbar.setTitle(inventoryItem.getName());
+-
+-        // pull in photo
+-        ImageButton profilePhoto = findViewById(R.id.profile_photo);
+-        Glide.with(profilePhoto.getContext())
+-                .load(inventoryItem.getPhotograph())
+-                .into(profilePhoto);
+-
+-        profilePhoto.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                // 1. create an intent pass class name or intnet action name
+-                Intent intent = new Intent(view.getContext(), ProfilePictureZoom.class);
+-
+-                // 2. put key/value data
+-                intent.putExtra("PhotoURL", inventoryItem.getPhotograph());
+-
+-                // 5. start the activity
+-                view.getContext().startActivity(intent);
+-            }
+-        });
+-
+-        // pull in RFID tag number
+-        TextView rfidTagTextView = findViewById(R.id.rfid_tag_num_textbox);
+-        String text = (inventoryItem.getRfid_tag_num());
+-        rfidTagTextView.setText(text);
+-
+-        // pull in location
+-        TextView locationTextView = findViewById(R.id.last_location_textbox);
+-        text = (inventoryItem.getLast_location());
+-        locationTextView.setText(text);
+-
+-        // pull in serial number
+-        TextView serialNumTextView = findViewById(R.id.serial_num_textbox);
+-        text = (inventoryItem.getSerial_num());
+-        serialNumTextView.setText(text);
+-
+-        // pull in price
+-        TextView priceTextView = findViewById(R.id.original_price_textbox);
+-        text = (inventoryItem.getOriginal_price());
+-        priceTextView.setText(text);
+-
+-        // pull in tag color
+-        if ("red".equals(inventoryItem.getTag_color())) {
+-            RadioButton radioButtonRedTag = findViewById(R.id.red_tag);
+-            radioButtonRedTag.setChecked(true);
+-        }
+-        else if ("green".equals(inventoryItem.getTag_color())) {
+-            RadioButton radioButtonGreenTag = findViewById(R.id.green_tag);
+-            radioButtonGreenTag.setChecked(true);
+-
+-        }
+-        else {
+-            RadioButton radioButtonNoTagColor = findViewById(R.id.no_tag_color);
+-            radioButtonNoTagColor.setChecked(true);
+-        }
+-
+-        // pull in item description
+-        TextView descriptionTextView = findViewById(R.id.description_text);
+-        text = (inventoryItem.getDescription());
+-        descriptionTextView.setText(text);
+-    }
+-
+-    private void editItem(final InventoryItem item){
+-        FloatingActionButton myFab = findViewById(R.id.fab);
+-        myFab.setOnClickListener(new View.OnClickListener() {
+-            public void onClick(View v) {
+-                Intent intent = new Intent(v.getContext(), ItemEditPage.class);
+-
+-                // send the current item fields to the edit page
+-                intent.putExtra("Parcelable inventory item", item);
+-                // need to get the edit result back to refresh the profile page
+-                // after saving
+-                startActivityForResult(intent, 1);
+-                finish();
+-            }
+-        });
+-    }
+-}
+Index: app/src/main/java/refried/rfid_inventory/TabbedActivity/ItemEditPage.java
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/TabbedActivity/ItemEditPage.java	(date 1519957966000)
++++ app/src/main/java/refried/rfid_inventory/editpage/ItemEditPage.java	(revision )
+@@ -1,4 +1,4 @@
+-package refried.rfid_inventory.TabbedActivity;
++package refried.rfid_inventory.editpage;
+ 
+ import android.app.Activity;
+ import android.content.Intent;
+@@ -16,7 +16,6 @@
+ import android.widget.Button;
+ import android.widget.EditText;
+ import android.widget.ImageButton;
+-import android.widget.ImageView;
+ import android.widget.RadioButton;
+ import android.widget.RadioGroup;
+ import android.widget.Toast;
+@@ -31,6 +30,7 @@
+ import refried.rfid_inventory.database.FirebaseDBInteractor;
+ import refried.rfid_inventory.database.InventoryItem;
+ import refried.rfid_inventory.util.CircleTransform;
++import refried.rfid_inventory.util.ProfilePictureZoom;
+ 
+ /**
+  * Full item view shows all of the details about an
+Index: app/src/main/java/refried/rfid_inventory/util/ItemsAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package refried.rfid_inventory.util;\n\nimport android.content.Context;\nimport android.content.Intent;\nimport android.graphics.Color;\nimport android.os.Bundle;\nimport android.support.v7.widget.RecyclerView;\nimport android.view.LayoutInflater;\nimport android.view.View;\nimport android.view.ViewGroup;\nimport android.widget.AdapterView;\nimport android.widget.ImageView;\nimport android.widget.TextView;\n\nimport com.bumptech.glide.Glide;\n\nimport java.util.List;\n\nimport refried.rfid_inventory.R;\nimport refried.rfid_inventory.TabbedActivity.ItemEditPage;\nimport refried.rfid_inventory.TabbedActivity.ItemProfilePage;\nimport refried.rfid_inventory.TabbedActivity.ViewTabFragment.ViewTab;\nimport refried.rfid_inventory.database.InventoryItem;\n\n/**\n * Adapter for database items. May refactor to be less generic.\n */\npublic class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {\n\n    /**\n     * Manages the data that goes into each row of View screen (into card view).\n     *\n     */\n    public class ViewHolder extends RecyclerView.ViewHolder {\n        private TextView nameTextView;          // Item Name\n        private TextView descTextView;   // Item Description (short)\n        private ImageView pictureImageView;       // Picture of the Item\n        private final View mView;\n        private ImageView tagColorDot; // dot indicating what color tag\n        private AdapterView.OnItemClickListener clickListener;\n\n        public ViewHolder(final View itemView) {\n            super(itemView);\n            mView = itemView;\n\n            nameTextView = itemView.findViewById(R.id.item_name);\n            descTextView = itemView.findViewById(R.id.short_description);\n            pictureImageView = itemView.findViewById(R.id.itemPic);\n            tagColorDot = itemView.findViewById(R.id.tag_color);\n        }\n    }\n\n    // Local Variables\n    private Context mContext;        // Overall context\n    private List<InventoryItem> mItems;\n\n    // Constructor\n    public ItemsAdapter(Context c, List<InventoryItem> items) {\n        mContext = c;\n        mItems = items;\n    }\n\n    private Context getContext() {\n        return mContext;\n    }\n\n    @Override\n    public ItemsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {\n        Context c = parent.getContext();\n        LayoutInflater inflater = LayoutInflater.from(c);\n\n        View itemView = inflater.inflate(R.layout.card_item, parent, false);\n\n        return (new ViewHolder(itemView));\n    }\n\n    @Override\n    public void onBindViewHolder(ItemsAdapter.ViewHolder viewHolder, int pos) {\n        InventoryItem it = mItems.get(pos);\n\n        TextView itemNameView = viewHolder.nameTextView;\n        itemNameView.setText(it.getName());\n        TextView shortDescView = viewHolder.descTextView;\n\n        String shortdesc = (it.getDescription());\n        if (it.getDescription().length() > 35) {\n            shortdesc = (it.getDescription().substring(0,34) + \"...\");\n        }\n        shortDescView.setText(shortdesc);\n\n        ImageView itemPicView = viewHolder.pictureImageView;\n        Glide.with(itemPicView.getContext())\n               .load(it.getPhotograph())\n                .transform(new CircleTransform(getContext())) // applying the image transformer\n                .into(itemPicView);\n\n        clickItem(viewHolder.mView, it);\n\n        ImageView tagColorDotView = viewHolder.tagColorDot;\n        if (\"red\".equals(it.getTag_color())) {\n            tagColorDotView.setColorFilter(Color.parseColor(\"#c90808\")); // #c90808 == Red\n        }\n        else if (\"green\".equals(it.getTag_color())) {\n            tagColorDotView.setColorFilter(Color.parseColor(\"#198e1d\")); // #198e1d == Green\n        }\n        else {\n            tagColorDotView.setColorFilter(Color.GRAY);\n        }\n    }\n\n    @Override\n    public int getItemCount() {\n        return mItems.size();\n    }\n\n    private void clickItem(final View v, final InventoryItem item) {\n\n        v.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View view) {\n                // 1. create an intent pass class name or intnet action name\n                Intent intent = new Intent(v.getContext(), ItemProfilePage.class);\n\n                // 2. put key/value data\n                intent.putExtra(\"Parcelable inventory item\", item);\n\n                // 3. start the activity\n                v.getContext().startActivity(intent);\n            }\n        });\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/util/ItemsAdapter.java	(date 1519957966000)
++++ app/src/main/java/refried/rfid_inventory/util/ItemsAdapter.java	(revision )
+@@ -3,7 +3,6 @@
+ import android.content.Context;
+ import android.content.Intent;
+ import android.graphics.Color;
+-import android.os.Bundle;
+ import android.support.v7.widget.RecyclerView;
+ import android.view.LayoutInflater;
+ import android.view.View;
+@@ -17,10 +16,9 @@
+ import java.util.List;
+ 
+ import refried.rfid_inventory.R;
+-import refried.rfid_inventory.TabbedActivity.ItemEditPage;
+-import refried.rfid_inventory.TabbedActivity.ItemProfilePage;
+-import refried.rfid_inventory.TabbedActivity.ViewTabFragment.ViewTab;
+ import refried.rfid_inventory.database.InventoryItem;
++import refried.rfid_inventory.profilepage.ItemProfilePageFragment;
++import refried.rfid_inventory.profilepage.ItemProfilePageContract;
+ 
+ /**
+  * Adapter for database items. May refactor to be less generic.
+@@ -35,9 +33,11 @@
+         private TextView nameTextView;          // Item Name
+         private TextView descTextView;   // Item Description (short)
+         private ImageView pictureImageView;       // Picture of the Item
+-        private final View mView;
+         private ImageView tagColorDot; // dot indicating what color tag
+         private AdapterView.OnItemClickListener clickListener;
++        public final View mView;
++        public InventoryItem mItem;
++        public OnItemSelectedListener mListener;
+ 
+         public ViewHolder(final View itemView) {
+             super(itemView);
+@@ -48,10 +48,26 @@
+             pictureImageView = itemView.findViewById(R.id.itemPic);
+             tagColorDot = itemView.findViewById(R.id.tag_color);
+         }
++
++        public void bind(InventoryItem item, OnItemSelectedListener listener) {
++            mListener = listener;
++            mItem = item;
++            mView.setOnClickListener(new View.OnClickListener() {
++                @Override
++                public void onClick(View v) {
++                    int position = getAdapterPosition();
++                    if(position >= 0) {
++                        mListener.onRVItemInteraction(position);
++                    }
++                }
++            });
++        }
+     }
+ 
+     // Local Variables
+     private Context mContext;        // Overall context
++    private ItemProfilePageContract.Presenter mPresenter;
++    private OnItemSelectedListener mListener;
+     private List<InventoryItem> mItems;
+ 
+     // Constructor
+@@ -60,6 +76,18 @@
+         mItems = items;
+     }
+ 
++    public ItemsAdapter(Context c, List<InventoryItem> items, ItemProfilePageContract.Presenter presenter) {
++        mContext = c;
++        mItems = items;
++        mPresenter = presenter;
++        mListener = new OnItemSelectedListener() {
++            @Override
++            public void onRVItemInteraction(int pos) {
++                mPresenter.chooseItem(mItems.get(pos));
++            }
++        };
++    }
++
+     private Context getContext() {
+         return mContext;
+     }
+@@ -106,6 +134,9 @@
+         else {
+             tagColorDotView.setColorFilter(Color.GRAY);
+         }
++
++        viewHolder.bind(mItems.get(pos), mListener);
++
+     }
+ 
+     @Override
+@@ -119,7 +150,7 @@
+             @Override
+             public void onClick(View view) {
+                 // 1. create an intent pass class name or intnet action name
+-                Intent intent = new Intent(v.getContext(), ItemProfilePage.class);
++                Intent intent = new Intent(v.getContext(), ItemProfilePageFragment.class);
+ 
+                 // 2. put key/value data
+                 intent.putExtra("Parcelable inventory item", item);
+@@ -129,4 +160,13 @@
+             }
+         });
+     }
++
++    /**
++     * This interface must be implemented by activities/fragments that use
++     * { @Link ItemsAdapter } to allow an interaction in it to be communicated
++     * to its activity/fragment.
++     */
++    public interface OnItemSelectedListener {
++        void onRVItemInteraction(int pos);
++    }
+ }
+Index: app/src/main/java/refried/rfid_inventory/TabbedActivity/ProfilePictureZoom.java
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/TabbedActivity/ProfilePictureZoom.java	(date 1519957966000)
++++ app/src/main/java/refried/rfid_inventory/util/ProfilePictureZoom.java	(revision )
+@@ -1,4 +1,4 @@
+-package refried.rfid_inventory.TabbedActivity;
++package refried.rfid_inventory.util;
+ 
+ import android.os.Bundle;
+ import android.support.annotation.Nullable;
+Index: app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePagePresenter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePagePresenter.java	(revision )
++++ app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePagePresenter.java	(revision )
+@@ -0,0 +1,43 @@
++package refried.rfid_inventory.profilepage;
++
++import android.content.Context;
++import android.content.IntentFilter;
++import android.support.annotation.NonNull;
++import refried.rfid_inventory.database.FirebaseDBContract;
++import refried.rfid_inventory.database.InventoryItem;
++
++/**
++ * Presenter for ItemProfilePageFragment.java
++ *   Handles logic for Viewing and forwards queries to the database.
++ */
++public class ItemProfilePagePresenter implements ItemProfilePageContract.Presenter {
++
++    // Variables
++    private ItemProfilePageContract.View mView;
++    private FirebaseDBContract mModel;
++    private Context mActivityContext;
++
++
++    // Constructor
++    public ItemProfilePagePresenter( @NonNull ItemProfilePageContract.View v, @NonNull FirebaseDBContract m) {
++        mView = v;
++        mModel = m;
++    }
++
++    // Overridden functions from ItemProfilePageContract.Presenter
++    @Override
++    public void start(Context c) {
++        mActivityContext = c;
++        // mView functions
++    }
++
++    @Override
++    public void stop() {
++        // actions when stop
++    }
++
++    @Override
++    public void chooseItem(InventoryItem item){
++        // what to do with the item when user chooses Item
++    }
++}
+Index: app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePageContract.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePageContract.java	(revision )
++++ app/src/main/java/refried/rfid_inventory/profilepage/ItemProfilePageContract.java	(revision )
+@@ -0,0 +1,77 @@
++package refried.rfid_inventory.profilepage;
++
++import android.content.Context;
++import android.net.Uri;
++
++import java.util.ArrayList;
++
++import refried.rfid_inventory.database.InventoryItem;
++
++/**
++ * Interface specification for all communications between Views and Presenters.
++ */
++
++public interface ItemProfilePageContract {
++
++    /**
++     * Implemented by GUI elements
++     */
++    interface View {
++
++
++        void onItemClick(int position);
++
++        /**
++         * Tells the GUI to show an error
++         *   when creating an item without a name
++         */
++//        void showNameError();
++//
++//        /**
++//         * Tells the GUI to show an error
++//         *   when creating an item with no description
++//         */
++//        void showDescError();
++//
++//        /**
++//         * Tells the GUI to show an error
++//         *   when creating an item with no price associated
++//         */
++//        void showPriceError();
++//
++//        /**
++//         * Tells the GUI to clean the input boxes
++//         *   when an item was successfully added to the inventory.
++//         */
++//        void clearInputBoxes();
++    }
++
++    /**
++     * Implemented by Presenter/logical elements
++     */
++    interface Presenter {
++
++        /**
++         * When the user has clicked on a particular item, hand it to the Presenter for
++         * interaction with the item.
++         * @param item The user's chosen item.
++         */
++        void chooseItem(InventoryItem item);
++
++        /**
++         * Tells the Presenter to begin operating upon Activity startup.
++         * <br>
++         * Call in Activity onStart()
++         * @param c Activity Context for registering listeners and receivers
++         */
++        void start(Context c);
++
++        /**
++         * Tells the Presenter to unregister all listeners and receivers.
++         * <br>
++         * Call in Activity onStop()
++         */
++        void stop();
++
++    }
++}
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    package=\"refried.rfid_inventory\">\r\n\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n    <uses-permission android:name=\"android.permission.BLUETOOTH\" />\r\n    <uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"true\" />\r\n\r\n    <application\r\n        android:name=\".RFIDInventoryApplication\"\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@drawable/inventory_logo_icon\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@drawable/inventory_logo_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\"\r\n        tools:replace=\"android:icon\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:label=\"@string/app_name\"\r\n            android:screenOrientation=\"portrait\"\r\n            android:windowSoftInputMode=\"adjustPan|stateHidden\">\r\n            <intent-filter>\r\n                 <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n             </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:screenOrientation=\"portrait\"\r\n            android:label=\"@string/title_activity_login\"/>\r\n\r\n        <activity\r\n            android:name=\".TabbedActivity.TabbedActivity\"\r\n            android:label=\"@string/title_activity_tabbed\"\r\n            android:screenOrientation=\"portrait\"\r\n            android:theme=\"@style/AppTheme\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".settings.SettingsActivity\"\r\n            android:label=\"@string/title_activity_settings\"\r\n            android:theme=\"@style/AppTheme\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\"com.uk.tsl.rfid.DeviceListActivity\"\r\n            tools:replace=\"android:label,android:theme\"\r\n            android:label=\"Device List Activity\"\r\n            android:theme=\"@style/AppTheme\"\r\n            android:windowSoftInputMode=\"adjustPan\" />\r\n        <activity\r\n            android:name=\".TabbedActivity.ItemProfilePage\"\r\n            android:label=\"@string/item_name\"\r\n            android:screenOrientation=\"portrait\"\r\n            android:theme=\"@style/AppTheme\"\r\n            android:windowSoftInputMode=\"adjustPan\"/>\r\n        <activity\r\n            android:name=\".TabbedActivity.ProfilePictureZoom\"\r\n            android:label=\"Zoom profile photo\"\r\n            android:theme=\"@style/AppTheme\"\r\n            android:windowSoftInputMode=\"adjustPan\"/>\r\n        <activity\r\n            android:name=\".TabbedActivity.ItemEditPage\"\r\n            android:label=\"Edit item page\"\r\n            android:screenOrientation=\"portrait\"\r\n            android:theme=\"@style/AppTheme\"\r\n            android:windowSoftInputMode=\"adjustPan\"/>\r\n\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(date 1519957966000)
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -55,13 +55,7 @@
+             android:theme="@style/AppTheme"
+             android:windowSoftInputMode="adjustPan" />
+         <activity
+-            android:name=".TabbedActivity.ItemProfilePage"
+-            android:label="@string/item_name"
+-            android:screenOrientation="portrait"
+-            android:theme="@style/AppTheme"
+-            android:windowSoftInputMode="adjustPan"/>
+-        <activity
+-            android:name=".TabbedActivity.ProfilePictureZoom"
++            android:name=".util.ProfilePictureZoom"
+             android:label="Zoom profile photo"
+             android:theme="@style/AppTheme"
+             android:windowSoftInputMode="adjustPan"/>
