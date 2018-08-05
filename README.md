@@ -1,4 +1,4 @@
-<a href="https://ibb.co/is9f0e" target="_blank"><img src="https://ibb.co/is9f0e" border="0" align="right" height="120" alt="Logo"></a>
+<a href="https://ibb.co/is9f0e" target="_blank"><img src="https://image.ibb.co/nz3Utz/inventory_logo.png" border="0" align="right" height="120" alt="Logo"></a>
 
 # Modern Cloud Based Academic Inventory System
 
