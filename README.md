@@ -1,4 +1,4 @@
-<a href="http://tinypic.com?ref=zx1yzr" target="_blank"><img src="http://i68.tinypic.com/zx1yzr.jpg" border="0" align="right" height="120" alt="ReFrIeD Logo"></a>
+<a href="http://tinypic.com?ref=zx1yzr" target="_blank"><img src="http://tinypic.com/r/2wemj2x/9" border="0" align="right" height="120" alt="ReFrIeD Logo"></a>
 
 # Modern Cloud Based Academic Inventory System
 
